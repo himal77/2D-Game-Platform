@@ -6,14 +6,14 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
-   // private Thread thread;
+    private Thread thread;
+
 
     public synchronized void start() {
         if(running) return;
         running = true;
-//        thread = new Thread(this);
-//        thread.start();
-        new Thread(this).start();
+        thread = new Thread(this);
+        thread.start();
     }
 
     public void run() {
@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames + "Ticks: " + updates);
+                System.out.println("FPS: " + frames + " Ticks: " + updates);
                 frames = 0;
                 updates = 0;
             }
@@ -65,7 +65,6 @@ public class Game extends Canvas implements Runnable {
 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(), getHeight());
-
 
         /////////////////////////////////////
 
