@@ -1,13 +1,23 @@
 package com.mountech.window;
 
+import com.mountech.framework.ObjectId;
+import com.mountech.objects.Test;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
     private Thread thread;
+    private Handler handler;
 
+
+    private void init(){
+        handler = new Handler();
+        handler.addObject(new Test(100, 100, ObjectId.Test));
+    }
 
     public synchronized void start() {
         if(running) return;
@@ -17,6 +27,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void run() {
+        init();
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000.0 / amountOfTicks;
@@ -47,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 
     // Ticking is like  updating the view 60 tick per second not more than that
     public void tick() {
-
+        handler.tick();
     }
 
     // This method is for rendering
@@ -65,6 +77,8 @@ public class Game extends Canvas implements Runnable {
 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(), getHeight());
+        g.setColor(Color.RED);
+        handler.render(g);
 
         /////////////////////////////////////
 

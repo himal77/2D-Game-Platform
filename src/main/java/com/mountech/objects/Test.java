@@ -5,9 +5,11 @@ import com.mountech.framework.ObjectId;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Random;
 
-public class Player extends GameObject {
-    public Player(float x, float y, ObjectId objectId) {
+public class Test extends GameObject {
+    private Random random = new Random();
+    public Test(float x, float y, ObjectId objectId) {
         super(x, y, objectId);
     }
 
@@ -16,7 +18,8 @@ public class Player extends GameObject {
     }
 
     public void render(Graphics g) {
-
+        g.setColor(Color.RED);
+        g.fillRect((int)x + random.nextInt(200) , (int)y + random.nextInt(200), 32, 32);
     }
 
     public float getX() {
