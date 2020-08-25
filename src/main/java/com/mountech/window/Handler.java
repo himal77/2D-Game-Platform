@@ -1,6 +1,8 @@
 package com.mountech.window;
 
 import com.mountech.framework.GameObject;
+import com.mountech.framework.ObjectId;
+import com.mountech.objects.Block;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -31,5 +33,11 @@ public class Handler {
 
     public void removeObject(GameObject object) {
         this.objects.remove(object);
+    }
+
+    public void createLevel(){
+        for(int xx = 0; xx < Game.WIDTH+32; xx += 32){
+            addObject(new Block(xx, Game.HEIGHT - 32, ObjectId.Block));
+        }
     }
 }

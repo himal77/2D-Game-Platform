@@ -1,13 +1,15 @@
 package com.mountech.window;
 
 import com.mountech.framework.ObjectId;
-import com.mountech.objects.Test;
+import com.mountech.objects.Block;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
+
+    public static int WIDTH;
+    public static int HEIGHT;
 
     private boolean running = false;
     private Thread thread;
@@ -15,8 +17,10 @@ public class Game extends Canvas implements Runnable {
 
 
     private void init(){
+        WIDTH = getWidth();
+        HEIGHT = getHeight();
         handler = new Handler();
-        handler.addObject(new Test(100, 100, ObjectId.Test));
+        handler.createLevel();
     }
 
     public synchronized void start() {
