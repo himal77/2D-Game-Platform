@@ -1,7 +1,7 @@
 package com.mountech.window;
 
 import com.mountech.framework.ObjectId;
-import com.mountech.objects.Block;
+import com.mountech.objects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -19,7 +19,11 @@ public class Game extends Canvas implements Runnable {
     private void init(){
         WIDTH = getWidth();
         HEIGHT = getHeight();
+
         handler = new Handler();
+
+        handler.addObject(new Player(100, 100, ObjectId.Player));
+
         handler.createLevel();
     }
 
@@ -54,7 +58,6 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames + " Ticks: " + updates);
                 frames = 0;
                 updates = 0;
             }
