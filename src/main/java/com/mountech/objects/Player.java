@@ -39,11 +39,28 @@ public class Player extends GameObject {
             GameObject tempObject = handler.objects.get(i);
 
             if(tempObject.getObjectId() == ObjectId.Block) {
+
+                if(getBoundsTop().intersects(tempObject.getBounds())){
+                    y = tempObject.getVelY() + 40;
+                    velY = 0;
+                }
+
+
                 if(getBounds().intersects(tempObject.getBounds())) {
                     y = tempObject.getY() - height;
                     velY = 0;
                     falling = false;
                     jumping = false;
+                }else {
+                    falling = true;
+                }
+
+                if(getBoundsRight().intersects(tempObject.getBounds())){
+                    x = tempObject.getX() - width;
+                }
+
+                if(getBoundsLeft().intersects(tempObject.getBounds())){
+                    x = tempObject.getX() + 35;
                 }
             }
         }

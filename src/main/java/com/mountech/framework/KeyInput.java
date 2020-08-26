@@ -24,11 +24,11 @@ public class KeyInput extends KeyAdapter {
             if(tempObject.getObjectId() == ObjectId.Player){
                 if(key == KeyEvent.VK_D) tempObject.setVelX(5);
                 if(key == KeyEvent.VK_A) tempObject.setVelX(-5);
+                if(key == KeyEvent.VK_SPACE && !tempObject.isJumping()){
+                    tempObject.setJumping(true);
+                    tempObject.setVelY(-10);
+                }
             }
-        }
-
-        if(key == 32){
-            System.exit(1);
         }
     }
 
@@ -40,6 +40,7 @@ public class KeyInput extends KeyAdapter {
             if(tempObject.getObjectId() == ObjectId.Player){
                 if(key == KeyEvent.VK_D) tempObject.setVelX(0);
                 if(key == KeyEvent.VK_A) tempObject.setVelX(0);
+                if(key == KeyEvent.VK_SPACE) tempObject.setVelY(0);
             }
         }
     }

@@ -65,6 +65,7 @@ public class Game extends Canvas implements Runnable {
 //                updates = 0;
 //            }
 //        }
+
         while(true) {
             try {
                 Thread.sleep(10);
