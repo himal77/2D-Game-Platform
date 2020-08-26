@@ -2,6 +2,7 @@ package com.mountech.objects;
 
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
+import com.mountech.window.Handler;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -12,8 +13,11 @@ public class Player extends GameObject {
 
     private float gravity = 0.01f;
 
-    public Player(float x, float y, ObjectId objectId) {
+    private Handler handler;
+
+    public Player(float x, float y,Handler handler, ObjectId objectId) {
         super(x, y, objectId);
+        this.handler = handler;
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -21,10 +25,26 @@ public class Player extends GameObject {
         y += velY;
 
         if(falling || jumping){
-            //velY += gravity;
+            velY += gravity;
 
             if(velY > MAX_SPEED){
                 velY = MAX_SPEED;
+            }
+        }
+        collision(object);
+    }
+
+    private void collision(LinkedList<GameObject> object){
+        for(int i= 0; i < handler.objects.size(); i++){
+            GameObject tempObject = handler.objects.get(i);
+
+            if(tempObject.getObjectId() == ObjectId.Block) {
+                if(getBounds().intersects(tempObject.getBounds())) {
+                    y = tempObject.getY() - height;
+                    velY = 0;
+                    falling = false;
+                    jumping = false;
+                }
             }
         }
     }
