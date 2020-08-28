@@ -1,11 +1,9 @@
 package com.mountech.framework;
 
-import com.mountech.window.Handler;
-import sun.awt.X11.XKeyEvent;
+import com.mountech.handler.Handler;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 
 public class KeyInput extends KeyAdapter {
 

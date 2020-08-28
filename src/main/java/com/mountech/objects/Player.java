@@ -2,7 +2,7 @@ package com.mountech.objects;
 
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
-import com.mountech.window.Handler;
+import com.mountech.handler.Handler;
 
 import java.awt.*;
 import java.util.LinkedList;

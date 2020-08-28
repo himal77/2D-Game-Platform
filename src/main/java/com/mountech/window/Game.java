@@ -1,7 +1,9 @@
 package com.mountech.window;
 
+import com.mountech.accessories.Camera;
 import com.mountech.framework.KeyInput;
 import com.mountech.framework.ObjectId;
+import com.mountech.handler.Handler;
 import com.mountech.objects.Player;
 
 import java.awt.*;
@@ -14,14 +16,16 @@ public class Game extends Canvas implements Runnable {
 
     private boolean running = false;
     private Thread thread;
-    private Handler handler;
 
+    private Handler handler;
+    private Camera camera;
 
     private void init(){
         WIDTH = getWidth();
         HEIGHT = getHeight();
 
         handler = new Handler();
+        camera = new Camera(0, 0);
 
         handler.addObject(new Player(100, 100, handler, ObjectId.Player));
 
@@ -80,6 +84,12 @@ public class Game extends Canvas implements Runnable {
     // Ticking is like  updating the view 60 tick per second not more than that
     public void tick() {
         handler.tick();
+        for(int i = 0; i < handler.objects.size(); i++) {
+            if(handler.objects.get(i).getObjectId() == ObjectId.Player) {
+                camera.tick(handler.objects.get(i));
+            }
+        }
+
     }
 
     // This method is for rendering
@@ -92,13 +102,19 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();  // This is gonna get graphics context for our buffering
-
+        Graphics2D g2d = (Graphics2D) g;
         ///// Everything is drawn here ///////
+
+
 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(), getHeight());
-        g.setColor(Color.RED);
+
+        g2d.translate(camera.getX(), camera.getY());  // Begin of camera
+
         handler.render(g);
+
+        g2d.translate(-camera.getX(), -camera.getY()); // End of camera
 
         /////////////////////////////////////
 

@@ -1,8 +1,9 @@
-package com.mountech.window;
+package com.mountech.handler;
 
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.objects.Block;
+import com.mountech.window.Game;
 
 import java.awt.*;
 import java.util.LinkedList;
