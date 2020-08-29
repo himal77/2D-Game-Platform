@@ -1,8 +1,7 @@
 package com.mountech.accessories;
 
 import com.mountech.framework.GameObject;
-import com.mountech.objects.Player;
-import com.mountech.window.Game;
+import com.mountech.Game;
 
 public class Camera {
     private float x, y;

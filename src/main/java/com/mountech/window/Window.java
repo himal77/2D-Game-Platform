@@ -1,5 +1,7 @@
 package com.mountech.window;
 
+import com.mountech.Game;
+
 import javax.swing.*;
 import java.awt.*;
 

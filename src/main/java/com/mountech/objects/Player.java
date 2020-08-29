@@ -1,8 +1,10 @@
 package com.mountech.objects;
 
+import com.mountech.Game;
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
+import com.mountech.imageLoader.Texture;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -11,9 +13,10 @@ public class Player extends GameObject {
 
     private float width = 48, height = 96, MAX_SPEED=10;
 
-    private float gravity = 0.01f;
+    private float gravity = 0.04f;
 
     private Handler handler;
+    private Texture tex = Game.getTexture();
 
     public Player(float x, float y,Handler handler, ObjectId objectId) {
         super(x, y, objectId);
@@ -41,7 +44,7 @@ public class Player extends GameObject {
             if(tempObject.getObjectId() == ObjectId.Block) {
 
                 if(getBoundsTop().intersects(tempObject.getBounds())){
-                    y = tempObject.getVelY() + 40;
+                    y = tempObject.getVelY() + height;
                     velY = 0;
                 }
 

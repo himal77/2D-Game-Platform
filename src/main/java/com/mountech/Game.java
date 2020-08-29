@@ -1,12 +1,14 @@
-package com.mountech.window;
+package com.mountech;
 
 import com.mountech.accessories.Camera;
 import com.mountech.events.KeyInput;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.BufferedImageLoader;
+import com.mountech.imageLoader.Texture;
 import com.mountech.objects.Block;
 import com.mountech.objects.Player;
+import com.mountech.window.Window;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -23,12 +25,14 @@ public class Game extends Canvas implements Runnable {
     private Handler handler;
     private Camera camera;
     private BufferedImage level = null;
+    public static Texture texture;
 
     private void init(){
 
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/level1.png");  // Loading the image
 
+        texture = new Texture();
         handler = new Handler();
         camera = new Camera(0, 0);
 
@@ -140,7 +144,7 @@ public class Game extends Canvas implements Runnable {
                 int blue = (pixel) & 0xff;
 
                 if(red == 255 && green == 255 && blue == 255){
-                    handler.addObject(new Block(xx * 32, yy * 32, ObjectId.Block));
+                    handler.addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block));
                 }
 
                 if(red == 00 && green == 00 && blue == 255){
@@ -148,6 +152,10 @@ public class Game extends Canvas implements Runnable {
                 }
             }
         }
+    }
+
+    public static Texture getTexture(){
+        return texture;
     }
 
     public static void main(String[] args) {
