@@ -1,5 +1,7 @@
-package com.mountech.framework;
+package com.mountech.events;
 
+import com.mountech.framework.GameObject;
+import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 
 import java.awt.event.KeyAdapter;
@@ -16,7 +18,7 @@ public class KeyInput extends KeyAdapter {
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        for(int i = 0; i < handler.objects.size(); i++){
+        for(int i = 0; i < handler.objects.size(); i++) {
             tempObject = handler.objects.get(i);
 
             if(tempObject.getObjectId() == ObjectId.Player){

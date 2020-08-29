@@ -1,35 +1,41 @@
 package com.mountech.window;
 
 import com.mountech.accessories.Camera;
-import com.mountech.framework.KeyInput;
+import com.mountech.events.KeyInput;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
+import com.mountech.imageLoader.BufferedImageLoader;
+import com.mountech.objects.Block;
 import com.mountech.objects.Player;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 
-    public static int WIDTH;
-    public static int HEIGHT;
+    public static int WIDTH = 800;
+    public static int HEIGHT = 600;
 
     private boolean running = false;
     private Thread thread;
 
     private Handler handler;
     private Camera camera;
+    private BufferedImage level = null;
 
     private void init(){
-        WIDTH = getWidth();
-        HEIGHT = getHeight();
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("/level1.png");  // Loading the image
 
         handler = new Handler();
         camera = new Camera(0, 0);
 
-        handler.addObject(new Player(100, 100, handler, ObjectId.Player));
+        loadImageLevel(level);
 
-        handler.createLevel();
+      //  handler.addObject(new Player(100, 100, handler, ObjectId.Player));
+      //  handler.createLevel();
 
         this.addKeyListener(new KeyInput(handler));
     }
@@ -122,7 +128,29 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
+    private void loadImageLevel(BufferedImage image){
+        int w = image.getWidth();
+        int h = image.getHeight();
+
+        for(int xx = 0; xx < h; xx++){
+            for(int yy = 0; yy < w; yy++){
+                int pixel = image.getRGB(xx, yy);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+                if(red == 255 && green == 255 && blue == 255){
+                    handler.addObject(new Block(xx * 32, yy * 32, ObjectId.Block));
+                }
+
+                if(red == 00 && green == 00 && blue == 255){
+                    handler.addObject(new Player(xx * 32, yy * 32, handler,  ObjectId.Player));
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        new Window(800, 600, "2D_Game_Platform", new Game());
+        new Window(WIDTH, HEIGHT, "2D_Game_Platform", new Game());
     }
 }

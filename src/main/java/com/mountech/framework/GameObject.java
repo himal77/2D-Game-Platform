@@ -9,7 +9,7 @@ public abstract class GameObject {
     protected ObjectId objectId;
     protected float velX = 0, velY = 0;
     protected boolean falling = true;
-    protected boolean jumping = false;
+    protected boolean jumping = true  ;
 
     public GameObject(float x, float y, ObjectId objectId){
         this.x = x;

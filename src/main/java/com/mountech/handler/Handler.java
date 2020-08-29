@@ -38,14 +38,10 @@ public class Handler {
 
     public void createLevel(){
         // Creating bottom block
-        for(int xx = 0; xx < Game.WIDTH+32; xx += 32){
+        for(int xx = 0; xx < Game.WIDTH * 2 + 32; xx += 32){
             addObject(new Block(xx, Game.HEIGHT - 28, ObjectId.Block));
         }
 
-        // Creating right side block
-        for(int xx = 0; xx < Game.HEIGHT+32; xx += 32){
-            addObject(new Block(Game.WIDTH - 48, xx, ObjectId.Block));
-        }
 
         // Creating left side block
         for(int xx = 0; xx < Game.HEIGHT+32; xx += 32){
