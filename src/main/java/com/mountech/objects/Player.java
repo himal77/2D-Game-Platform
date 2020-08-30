@@ -5,22 +5,25 @@ import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
+import com.mountech.window.Animation;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Player extends GameObject {
 
-    private float width = 48, height = 96, MAX_SPEED=10;
+    public static float width = 51, height = 112, MAX_SPEED=10;
 
     private float gravity = 0.04f;
 
     private Handler handler;
     private Texture tex = Game.getTexture();
+    private Animation playerWalk;
 
     public Player(float x, float y,Handler handler, ObjectId objectId) {
         super(x, y, objectId);
         this.handler = handler;
+        playerWalk = new Animation(4, tex.player[0],tex.player[1],tex.player[2],tex.player[3],tex.player[4]);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -35,6 +38,8 @@ public class Player extends GameObject {
             }
         }
         collision(object);
+
+        playerWalk.runAnimation();
     }
 
     private void collision(LinkedList<GameObject> object){
@@ -72,14 +77,11 @@ public class Player extends GameObject {
     public void render(Graphics g) {
 
         g.setColor(Color.BLUE);
-        g.fillRect((int)x, (int)y, (int)width, (int)height);
-        g.setColor(Color.RED);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(getBounds());
-        g2d.draw(getBoundsRight());
-        g2d.draw(getBoundsLeft());
-        g2d.draw(getBoundsTop());
-
+        if(velX != 0){
+            playerWalk.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+        } else {
+            g.drawImage(tex.player[0], (int) x, (int) y, (int) width, (int) height, null);
+        }
     }
 
     public Rectangle getBounds() {
