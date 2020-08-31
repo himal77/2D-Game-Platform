@@ -77,10 +77,15 @@ public class Player extends GameObject {
     public void render(Graphics g) {
 
         g.setColor(Color.BLUE);
-        if(velX != 0){
-            playerWalk.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
-        } else {
-            g.drawImage(tex.player[0], (int) x, (int) y, (int) width, (int) height, null);
+
+        if(jumping){
+            g.drawImage(tex.player[3], (int) x, (int) y, (int) width, (int) height, null);
+        }else{
+            if(velX != 0){
+                playerWalk.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+            } else {
+                g.drawImage(tex.player[0], (int) x, (int) y, (int) width, (int) height, null);
+            }
         }
     }
 
