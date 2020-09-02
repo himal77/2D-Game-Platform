@@ -18,12 +18,18 @@ public class Player extends GameObject {
 
     private Handler handler;
     private Texture tex = Game.getTexture();
-    private Animation playerWalk;
+    private Animation playerWalkRight;
+    private Animation playerWalkLeft;
 
     public Player(float x, float y,Handler handler, ObjectId objectId) {
         super(x, y, objectId);
         this.handler = handler;
-        playerWalk = new Animation(4, tex.player[0],tex.player[1],tex.player[2],tex.player[3],tex.player[4]);
+        playerWalkRight = new Animation(4, tex.playerFaceRight[0],
+                tex.playerFaceRight[1],tex.playerFaceRight[2],
+                tex.playerFaceRight[3],tex.playerFaceRight[4]);
+        playerWalkLeft = new Animation(4, tex.playerFaceLeft[0],
+                tex.playerFaceLeft[1],tex.playerFaceLeft[2],
+                tex.playerFaceLeft[3],tex.playerFaceLeft[4]);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -39,7 +45,8 @@ public class Player extends GameObject {
         }
         collision(object);
 
-        playerWalk.runAnimation();
+        playerWalkRight.runAnimation();
+        playerWalkLeft.runAnimation();
     }
 
     private void collision(LinkedList<GameObject> object){
@@ -49,14 +56,15 @@ public class Player extends GameObject {
             if(tempObject.getObjectId() == ObjectId.Block) {
 
                 if(getBoundsTop().intersects(tempObject.getBounds())){
-                    y = tempObject.getVelY() + height;
                     velY = 0;
+                    y = tempObject.getVelY() + height;
+
                 }
 
 
                 if(getBounds().intersects(tempObject.getBounds())) {
-                    y = tempObject.getY() - height;
                     velY = 0;
+                    y = tempObject.getY() - height;
                     falling = false;
                     jumping = false;
                 }else {
@@ -79,12 +87,20 @@ public class Player extends GameObject {
         g.setColor(Color.BLUE);
 
         if(jumping){
-            g.drawImage(tex.player[3], (int) x, (int) y, (int) width, (int) height, null);
+            if(facing == 1)
+                g.drawImage(tex.playerFaceRight[3], (int) x, (int) y, (int) width, (int) height, null);
+            else
+                g.drawImage(tex.playerFaceLeft[3], (int) x, (int) y, (int) width, (int) height, null);
         }else{
-            if(velX != 0){
-                playerWalk.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
-            } else {
-                g.drawImage(tex.player[0], (int) x, (int) y, (int) width, (int) height, null);
+            if(velX != 0 && facing == 1){
+                playerWalkRight.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+            } else if(velX != 0 && facing == -1){
+               playerWalkLeft.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+            }else{
+                if(facing == 1)
+                    g.drawImage(tex.playerFaceRight[0], (int) x, (int) y, (int) width, (int) height, null);
+                else
+                    g.drawImage(tex.playerFaceLeft[0], (int) x, (int) y, (int) width, (int) height, null);
             }
         }
     }
