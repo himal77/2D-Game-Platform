@@ -24,23 +24,20 @@ public class Game extends Canvas implements Runnable {
 
     private Handler handler;
     private Camera camera;
-    private BufferedImage level = null, cloud = null;
+    private BufferedImage level1Image = null, cloud = null;
     public static Texture texture;
 
     private void init(){
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("/level1.png");  // Loading the image
+        level1Image = loader.loadImage("/level1.png");  // Loading the image
 
         cloud = loader.loadImage("/cloud.jpg");
         texture = new Texture();
         handler = new Handler();
         camera = new Camera(0, 0);
 
-        loadImageLevel(level);
-
-      //  handler.addObject(new Player(100, 100, handler, ObjectId.Player));
-      //  handler.createLevel();
+        handler.createLevel(level1Image);
 
         this.addKeyListener(new KeyInput(handler));
     }
@@ -131,27 +128,7 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
-    private void loadImageLevel(BufferedImage image){
-        int w = image.getWidth();
-        int h = image.getHeight();
 
-        for(int xx = 0; xx < h; xx++){
-            for(int yy = 0; yy < w; yy++){
-                int pixel = image.getRGB(xx, yy);
-                int red = (pixel >> 16) & 0xff;
-                int green = (pixel >> 8) & 0xff;
-                int blue = (pixel) & 0xff;
-
-                if(red == 255 && green == 255 && blue == 255){
-                    handler.addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block));
-                }
-
-                if(red == 00 && green == 00 && blue == 255){
-                    handler.addObject(new Player(xx * 32, yy * 32, handler,  ObjectId.Player));
-                }
-            }
-        }
-    }
 
     public static Texture getTexture(){
         return texture;

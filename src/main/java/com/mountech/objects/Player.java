@@ -44,9 +44,10 @@ public class Player extends GameObject {
             }
         }
         collision(object);
-
-        playerWalkRight.runAnimation();
-        playerWalkLeft.runAnimation();
+        if(facing == 1)
+            playerWalkRight.runAnimation();
+        else
+            playerWalkLeft.runAnimation();
     }
 
     private void collision(LinkedList<GameObject> object){
@@ -83,6 +84,12 @@ public class Player extends GameObject {
     }
 
     public void render(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.draw(getBounds());
+        g2d.draw(getBoundsTop());
+        g2d.draw(getBoundsLeft());
+        g2d.draw(getBoundsRight());
+
 
         g.setColor(Color.BLUE);
 
@@ -114,9 +121,9 @@ public class Player extends GameObject {
 
     }
     public Rectangle getBoundsRight() {
-        return new Rectangle((int) ((int)x+width - 5), (int)y+5, (int)5, (int)height-10);
+        return new Rectangle((int) ((int)x+width - 5), (int)y+5, (int) 5, (int)height-10);
     }
     public Rectangle getBoundsLeft() {
-        return new Rectangle((int)x, (int)y+5, 5,(int) height-10);
+        return new Rectangle((int)x, (int)y + 5, 5,(int) height-10);
     }
 }
