@@ -5,6 +5,7 @@ public  enum ObjectId {
     Block(),
     Bullet(),
     Flag(),
-    NonMovingEnemy();
+    NonMovingEnemy(),
+    MovingEnemy;
 
 }

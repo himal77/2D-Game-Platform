@@ -4,6 +4,7 @@ import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.objects.Block;
 import com.mountech.Game;
+import com.mountech.objects.MovingEnemy;
 import com.mountech.objects.NonMovingEnemy;
 import com.mountech.objects.Player;
 
@@ -59,6 +60,10 @@ public class Handler {
 
                 if(red == 0 && green == 255 && blue == 00){
                     addObject(new NonMovingEnemy(xx * 32, yy * 32, ObjectId.NonMovingEnemy));
+                }
+
+                if(red == 255 && green == 0 && blue == 00){
+                    addObject(new MovingEnemy(xx * 32, yy * 32, ObjectId.MovingEnemy));
                 }
             }
         }
