@@ -7,8 +7,10 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class Bullet extends GameObject {
-    public Bullet(float x, float y, ObjectId objectId, int velX) {
+    public Bullet(float x, float y, ObjectId objectId, int velX, int width, int height) {
         super(x, y, objectId);
+        this.width = width;
+        this.height = height;
         this.velX = velX;
     }
 

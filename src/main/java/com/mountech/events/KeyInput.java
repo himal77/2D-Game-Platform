@@ -37,7 +37,7 @@ public class KeyInput extends KeyAdapter {
                     tempObject.setJumping(true);
                 }
                 if(key == KeyEvent.VK_SPACE){
-                    handler.addObject(new Bullet(tempObject.getX(), tempObject.getY() + 40, ObjectId.Bullet, tempObject.getFacing() * 5));
+                    handler.addObject(new Bullet(tempObject.getX(), tempObject.getY() + 40, ObjectId.Bullet, tempObject.getFacing() * 5, 10, 10));
                 }
             }
         }

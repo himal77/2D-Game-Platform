@@ -14,8 +14,10 @@ public class Block extends GameObject {
 
     private Texture texture = Game.getTexture();
 
-    public Block(float x, float y, int type, ObjectId objectId) {
+    public Block(float x, float y, int type, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
+        this.width = width;
+        this.height = height;
         this.type = type;
     }
 

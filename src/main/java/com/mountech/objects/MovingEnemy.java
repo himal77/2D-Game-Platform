@@ -7,9 +7,10 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class MovingEnemy extends GameObject {
-    private int width = 50, height = 100;
-    public MovingEnemy(float x, float y, ObjectId objectId) {
+    public MovingEnemy(float x, float y, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
+        this.width = width;
+        this.height = height;
     }
 
     public void tick(LinkedList<GameObject> object) {

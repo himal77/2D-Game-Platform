@@ -51,19 +51,19 @@ public class Handler {
                 int blue = (pixel) & 0xff;
 
                 if(red == 255 && green == 255 && blue == 255){
-                    addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block));
+                    addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block, 32, 32));
                 }
 
                 if(red == 00 && green == 00 && blue == 255){
-                    addObject(new Player(xx * 32, yy * 32, this,  ObjectId.Player));
+                    addObject(new Player(xx * 32, yy * 32, this,  ObjectId.Player, 50, 100));
                 }
 
                 if(red == 0 && green == 255 && blue == 00){
-                    addObject(new NonMovingEnemy(xx * 32, yy * 32, ObjectId.NonMovingEnemy));
+                    addObject(new NonMovingEnemy(xx * 32, yy * 32, ObjectId.NonMovingEnemy, 40, 50));
                 }
 
                 if(red == 255 && green == 0 && blue == 00){
-                    addObject(new MovingEnemy(xx * 32, yy * 32, ObjectId.MovingEnemy));
+                    addObject(new MovingEnemy(xx * 32, yy * 32, ObjectId.MovingEnemy, 30, 30));
                 }
             }
         }

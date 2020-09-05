@@ -12,17 +12,18 @@ import java.util.LinkedList;
 
 public class Player extends GameObject {
 
-    public static float width = 51, height = 112, MAX_SPEED=10;
-
     private float gravity = 0.04f;
+    private int MAX_SPEED = 10;
 
     private Handler handler;
     private Texture tex = Game.getTexture();
     private Animation playerWalkRight;
     private Animation playerWalkLeft;
 
-    public Player(float x, float y,Handler handler, ObjectId objectId) {
+    public Player(float x, float y,Handler handler, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
+        this.width = width;
+        this.height = height;
         this.handler = handler;
         playerWalkRight = new Animation(4, tex.playerFaceRight[0],
                 tex.playerFaceRight[1],tex.playerFaceRight[2],

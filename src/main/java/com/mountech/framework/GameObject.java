@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public abstract class GameObject {
+    protected int width, height;
     protected float x, y;
     protected ObjectId objectId;
     protected float velX = 0, velY = 0;
