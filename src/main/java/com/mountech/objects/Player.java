@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class Player extends GameObject {
 
-    private float gravity = 0.04f;
+    private float gravity = 0.1f;
     private int MAX_SPEED = 10;
 
     private Handler handler;
@@ -112,9 +112,9 @@ public class Player extends GameObject {
     public Rectangle getBoundsBottom() {
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        int boundW = (int)getBounds().getWidth();
-        int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX + 10, boundY + (int)(boundH / 2), boundW - 10, (int)(boundH / 2));
+        int boundW = (int)getBounds().getWidth(); // 25
+        int boundH = (int)getBounds().getHeight(); // 75
+        return new Rectangle(boundX + 7, boundY + (int)(boundH / 2), boundW - 7, (int)(boundH / 2));
     }
 
     public Rectangle getBoundsTop() {
@@ -122,20 +122,20 @@ public class Player extends GameObject {
         int boundY = (int)getBounds().getY();
         int boundW = (int)getBounds().getWidth();
         int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX + 10, boundY, boundW - 10, (int)(boundH / 2));
+        return new Rectangle(boundX + 7, boundY, boundW - 7, (int)(boundH / 2));
     }
     public Rectangle getBoundsRight() {
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
         int boundW = (int)getBounds().getWidth();
         int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX + boundW - 10 , boundY + 5, 10, boundH - 5);
+        return new Rectangle(boundX + boundW - 7 , boundY + 5, 7, boundH - 15);
     }
     public Rectangle getBoundsLeft() {
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
         int boundW = (int)getBounds().getWidth();
         int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX, boundY + 5, 10, boundH - 5);
+        return new Rectangle(boundX, boundY + 5, 7, boundH - 15);
     }
 }
