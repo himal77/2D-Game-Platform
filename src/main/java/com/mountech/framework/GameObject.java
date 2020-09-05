@@ -2,6 +2,7 @@ package com.mountech.framework;
 
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 
 public abstract class GameObject {
@@ -21,7 +22,7 @@ public abstract class GameObject {
 
     public abstract void tick(LinkedList<GameObject> object);
     public abstract void render(Graphics g);
-    public abstract Rectangle getBounds();
+    public abstract Rectangle2D getBounds();
 
     public float getX() {
         return x;
@@ -85,5 +86,13 @@ public abstract class GameObject {
 
     public void setFacing(int facing) {
         this.facing = facing;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }
