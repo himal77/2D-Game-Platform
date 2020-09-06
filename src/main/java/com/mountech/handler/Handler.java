@@ -3,9 +3,8 @@ package com.mountech.handler;
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.objects.Block;
-import com.mountech.Game;
-import com.mountech.objects.MovingEnemy;
-import com.mountech.objects.NonMovingEnemy;
+import com.mountech.objects.enemy.DuckEnemy;
+import com.mountech.objects.enemy.MushroomEnemy;
 import com.mountech.objects.Player;
 
 import java.awt.*;
@@ -49,21 +48,21 @@ public class Handler {
                 int red = (pixel >> 16) & 0xff;
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
-
+                // Block
                 if(red == 255 && green == 255 && blue == 255){
                     addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block, 32, 32));
                 }
-
+                // Player
                 if(red == 00 && green == 00 && blue == 255){
                     addObject(new Player(xx * 32, yy * 32, this,  ObjectId.Player, 50, 100));
                 }
-
+                // mushroomEnemy
                 if(red == 0 && green == 255 && blue == 00){
-                    addObject(new NonMovingEnemy(xx * 32, yy * 32, ObjectId.NonMovingEnemy, 40, 50));
+                    addObject(new MushroomEnemy(xx * 32, yy * 32, ObjectId.mushroomEnemy, 40, 50));
                 }
-
+                // duckEnemy
                 if(red == 255 && green == 0 && blue == 00){
-                    addObject(new MovingEnemy(xx * 32, yy * 32, ObjectId.MovingEnemy, 30, 30));
+                    addObject(new DuckEnemy(xx * 32, yy * 32, ObjectId.duckEnemy, 90, 50));
                 }
             }
         }

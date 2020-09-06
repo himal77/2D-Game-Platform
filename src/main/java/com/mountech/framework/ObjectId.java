@@ -5,7 +5,7 @@ public  enum ObjectId {
     Block(),
     Bullet(),
     Flag(),
-    NonMovingEnemy(),
-    MovingEnemy;
+    mushroomEnemy(),
+    duckEnemy();
 
 }

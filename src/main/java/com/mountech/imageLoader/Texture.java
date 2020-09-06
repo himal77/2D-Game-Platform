@@ -1,13 +1,12 @@
 package com.mountech.imageLoader;
 
-import com.mountech.objects.Player;
-
 import java.awt.image.BufferedImage;
 
 public class Texture {
     private int playerH = 112, playerW = 51;
-    private int nmEnemyH = 20, nmEnemyW = 20;
     private int blockH = 32, blockW = 32;
+    private int mushroomEnemyH = 20, mushroomEnemyW = 20;
+    private int duckEnemyH = 25, duckEnemyW = 30;
 
     private SpriteSheet ps, bs, es;
     private BufferedImage block_sheet = null;
@@ -17,7 +16,8 @@ public class Texture {
     public BufferedImage[] block = new BufferedImage[2];
     public BufferedImage[] playerFaceRight = new BufferedImage[5];
     public BufferedImage[] playerFaceLeft = new BufferedImage[5];
-    public BufferedImage[] nonMovingEnemy = new BufferedImage[3];
+    public BufferedImage[] mushroomEnemy = new BufferedImage[3];
+    public BufferedImage[] duckEnemy = new BufferedImage[4];
 
 
     public Texture(){
@@ -51,8 +51,13 @@ public class Texture {
         playerFaceLeft[3] = ps.grabImage(9, 1, playerW, playerH);
         playerFaceLeft[4] = ps.grabImage(10,1, playerW, playerH);
 
-        nonMovingEnemy[0] = es.grabImage(1, 1, nmEnemyW, nmEnemyH);
-        nonMovingEnemy[1] = es.grabImage(2, 1, nmEnemyW, nmEnemyH);
-        nonMovingEnemy[2] = es.grabImage(3, 1, nmEnemyW, nmEnemyH);
+        mushroomEnemy[0] = es.grabImage(1, 1, mushroomEnemyW, mushroomEnemyH);
+        mushroomEnemy[1] = es.grabImage(2, 1, mushroomEnemyW, mushroomEnemyH);
+        mushroomEnemy[2] = es.grabImage(3, 1, mushroomEnemyW, mushroomEnemyH);
+
+        duckEnemy[0] = es.grabImage(6, 1, duckEnemyW, duckEnemyH);
+        duckEnemy[1] = es.grabImage(7, 1, duckEnemyW, duckEnemyH);
+        duckEnemy[2] = es.grabImage(8, 1, duckEnemyW, duckEnemyH);
+        duckEnemy[3] = es.grabImage(9, 1, duckEnemyW, duckEnemyH);
     }
 }

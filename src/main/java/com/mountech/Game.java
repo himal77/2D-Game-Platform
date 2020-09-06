@@ -6,8 +6,6 @@ import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.BufferedImageLoader;
 import com.mountech.imageLoader.Texture;
-import com.mountech.objects.Block;
-import com.mountech.objects.Player;
 import com.mountech.window.Window;
 
 import java.awt.*;
@@ -111,10 +109,8 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();  // This is gonna get graphics context for our buffering
         Graphics2D g2d = (Graphics2D) g;
-        ///// Everything is drawn here ///////
 
-        g.setColor(new Color(25, 191, 224));
-        g.fillRect(0, 0, getWidth(), getHeight());
+        ///// Everything is drawn here ///////
 
         g2d.translate(camera.getX(), camera.getY());  // Begin of camera
         for(int xx = 0; xx < cloud.getWidth() * 5; xx += cloud.getWidth())

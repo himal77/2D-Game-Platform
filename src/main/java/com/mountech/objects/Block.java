@@ -6,12 +6,13 @@ import com.mountech.framework.ObjectId;
 import com.mountech.imageLoader.Texture;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class Block extends GameObject {
     private int type;
 
+    private BufferedImage cloud;
     private Texture texture = Game.getTexture();
 
     public Block(float x, float y, int type, ObjectId objectId, int width, int height) {
