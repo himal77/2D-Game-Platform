@@ -6,6 +6,7 @@ import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.BufferedImageLoader;
 import com.mountech.imageLoader.Texture;
+import com.mountech.objects.Player;
 import com.mountech.window.Window;
 
 import java.awt.*;
@@ -24,9 +25,9 @@ public class Game extends Canvas implements Runnable {
     private Camera camera;
     private BufferedImage level1Image = null, cloud = null;
     public static Texture texture;
+    private Player player;
 
     private void init(){
-
         BufferedImageLoader loader = new BufferedImageLoader();
         level1Image = loader.loadImage("/level1.png");  // Loading the image
 
@@ -36,6 +37,11 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(0, 0);
 
         handler.createLevel(level1Image);
+        for(int i = 0; i < handler.objects.size(); i++){
+            if(handler.objects.get(i).getObjectId() == ObjectId.Player){
+                player = (Player) handler.objects.get(i);
+            }
+        }
 
         this.addKeyListener(new KeyInput(handler));
     }
@@ -50,31 +56,6 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         init();
         this.requestFocus();
-//        long lastTime = System.nanoTime();
-//        double amountOfTicks = 60.0;
-//        double ns = 1000000000 / amountOfTicks;
-//        double delta = 0;
-//        long timer = System.currentTimeMillis();
-//        int updates = 0;
-//        int frames = 0;
-//        while(running){
-//            long now = System.nanoTime();
-//            delta += (now - lastTime) / ns;
-//            lastTime = now;
-//            while(delta >= 1){
-//                tick();
-//                updates++;
-//                delta--;
-//            }
-//            render();
-//            frames++;
-//
-//            if((System.currentTimeMillis() - timer) > 1000){
-//                timer += 1000;
-//                frames = 0;
-//                updates = 0;
-//            }
-//        }
 
         while(true) {
             try {
@@ -112,11 +93,15 @@ public class Game extends Canvas implements Runnable {
 
         ///// Everything is drawn here ///////
 
-        g2d.translate(camera.getX(), camera.getY());  // Begin of camera
-        for(int xx = 0; xx < cloud.getWidth() * 5; xx += cloud.getWidth())
+        if(player.getX() > WIDTH / 2)
+            g2d.translate(camera.getX(), camera.getY());  // Begin of camera
+
+        for (int xx = 0; xx < cloud.getWidth() * 5; xx += cloud.getWidth())
             g.drawImage(cloud, xx, 0, null);
         handler.render(g);
-        g2d.translate(-camera.getX(), -camera.getY()); // End of camera
+
+        if(player.getX() > WIDTH / 2)
+             g2d.translate(-camera.getX(), -camera.getY()); // End of camera
 
         /////////////////////////////////////
 

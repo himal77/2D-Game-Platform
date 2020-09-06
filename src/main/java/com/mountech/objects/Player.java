@@ -72,11 +72,11 @@ public class Player extends GameObject {
                 }
                 if(getBoundsRight().intersects(tempObject.getBounds())){
                     velX = 0;
-                    x = this.getX() - 5;
+                    x = this.getX() - 1;
                 }
                 if(getBoundsLeft().intersects(tempObject.getBounds())){
                     velX = 0;
-                    x = this.getX() + 5;
+                    x = this.getX() + 1;
                 }
             }
         }
@@ -100,13 +100,13 @@ public class Player extends GameObject {
                 if(facing == 1)
                     g.drawImage(tex.playerFaceRight[0], (int) x, (int) y, (int) width, (int) height, null);
                 else
-                    g.drawImage(tex.playerFaceLeft[0], (int) x, (int) y, (int) width, (int) height, null);
+                    g.drawImage(tex.playerFaceLeft[4], (int) x, (int) y, (int) width, (int) height, null);
             }
         }
     }
 
     public Rectangle getBounds(){
-        return new Rectangle((int)x + 15, (int)y + 15, width - 25, height - 25);
+        return new Rectangle((int)x + 15, (int)y + 15, width - (int)(width * 50)/100, height - (int)(height*25)/100);
     }
 
     public Rectangle getBoundsBottom() {

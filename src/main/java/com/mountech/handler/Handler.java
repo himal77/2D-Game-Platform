@@ -50,7 +50,7 @@ public class Handler {
                 int blue = (pixel) & 0xff;
                 // Block
                 if(red == 255 && green == 255 && blue == 255){
-                    addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block, 32, 32));
+                    addObject(new Block(xx * 32, yy * 32, 0,  ObjectId.Block, 60, 60));
                 }
                 // Player
                 if(red == 00 && green == 00 && blue == 255){
@@ -58,11 +58,11 @@ public class Handler {
                 }
                 // mushroomEnemy
                 if(red == 0 && green == 255 && blue == 00){
-                    addObject(new MushroomEnemy(xx * 32, yy * 32, ObjectId.mushroomEnemy, 40, 50));
+                    addObject(new MushroomEnemy(xx * 32, yy * 32, ObjectId.mushroomEnemy, 30, 30));
                 }
                 // duckEnemy
                 if(red == 255 && green == 0 && blue == 00){
-                    addObject(new DuckEnemy(xx * 32, yy * 32, ObjectId.duckEnemy, 90, 50));
+                    addObject(new DuckEnemy(xx * 32, yy * 32, ObjectId.duckEnemy, 100, 60));
                 }
             }
         }

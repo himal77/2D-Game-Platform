@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class MushroomEnemy extends GameObject {
+    private int type;
 
     private Texture texture = Game.getTexture();
 

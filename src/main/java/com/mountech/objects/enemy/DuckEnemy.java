@@ -9,6 +9,8 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class DuckEnemy extends GameObject {
+    private int type;
+
     private Texture texture = Game.getTexture();
 
     public DuckEnemy(float x, float y, ObjectId objectId, int width, int height) {
@@ -24,11 +26,15 @@ public class DuckEnemy extends GameObject {
     }
 
     public void render(Graphics g) {
-        g.drawImage(texture.duckEnemy[0], (int)x, (int)y, width, height, null);
+        g.drawImage(texture.duckEnemy[3], (int)x, (int)y, width, height, null);
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.draw(getBounds());
     }
 
     public Rectangle getBounds() {
-        return null;
+        // Decreasing 42% of width of duck
+        return new Rectangle((int)x, (int)y, width - (int)(width * 42)/100, height);
+
     }
 
 }
