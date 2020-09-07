@@ -22,15 +22,18 @@ public class Player extends GameObject {
 
     public Player(float x, float y,Handler handler, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
-        this.width = width;
-        this.height = height;
+        this.objectWidth = width;
+        this.objectHeight = height;
         this.handler = handler;
         playerWalkRight = new Animation(4, tex.playerFaceRight[0],
                 tex.playerFaceRight[1],tex.playerFaceRight[2],
                 tex.playerFaceRight[3],tex.playerFaceRight[4]);
-        playerWalkLeft = new Animation(4, tex.playerFaceLeft[0],
+        playerWalkLeft = new Animation(4,  tex.playerFaceLeft[0],
                 tex.playerFaceLeft[1],tex.playerFaceLeft[2],
                 tex.playerFaceLeft[3],tex.playerFaceLeft[4]);
+        boundWidth = (objectWidth * 50)/100;
+        boundHeight =  (objectHeight *25)/100;
+
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -88,25 +91,25 @@ public class Player extends GameObject {
 
         if(jumping){
             if(facing == 1)
-                g.drawImage(tex.playerFaceRight[3], (int) x, (int) y, (int) width, (int) height, null);
+                g.drawImage(tex.playerFaceRight[3], (int) x, (int) y, (int) objectWidth, (int) objectHeight, null);
             else
-                g.drawImage(tex.playerFaceLeft[1], (int) x, (int) y, (int) width, (int) height, null);
+                g.drawImage(tex.playerFaceLeft[1], (int) x, (int) y, (int) objectWidth, (int) objectHeight, null);
         }else{
             if(velX != 0 && facing == 1){
-                playerWalkRight.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+                playerWalkRight.drawAnimation(g, (int)x, (int)y, (int) objectWidth, (int) objectHeight);
             } else if(velX != 0 && facing == -1){
-               playerWalkLeft.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
+               playerWalkLeft.drawAnimation(g, (int)x, (int)y, (int) objectWidth, (int) objectHeight);
             }else{
                 if(facing == 1)
-                    g.drawImage(tex.playerFaceRight[0], (int) x, (int) y, (int) width, (int) height, null);
+                    g.drawImage(tex.playerFaceRight[0], (int) x, (int) y, (int) objectWidth, (int) objectHeight, null);
                 else
-                    g.drawImage(tex.playerFaceLeft[4], (int) x, (int) y, (int) width, (int) height, null);
+                    g.drawImage(tex.playerFaceLeft[4], (int) x, (int) y, (int) objectWidth, (int) objectHeight, null);
             }
         }
     }
 
     public Rectangle getBounds(){
-        return new Rectangle((int)x + 15, (int)y + 15, width - (int)(width * 50)/100, height - (int)(height*25)/100);
+        return new Rectangle((int)x + 15, (int)y + 15, objectWidth - (int)(objectWidth * 50)/100, objectHeight - (int)(objectHeight *25)/100);
     }
 
     public Rectangle getBoundsBottom() {

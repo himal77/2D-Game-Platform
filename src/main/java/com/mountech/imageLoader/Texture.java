@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class Texture {
     private int playerH = 112, playerW = 51;
     private int blockH = 32, blockW = 32;
-    private int mushroomEnemyH = 20, mushroomEnemyW = 20;
+    private int mushroomEnemyH = 25, mushroomEnemyW = 30;
     private int duckEnemyH = 25, duckEnemyW = 30;
 
     private SpriteSheet ps, bs, es;

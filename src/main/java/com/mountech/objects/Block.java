@@ -17,8 +17,8 @@ public class Block extends GameObject {
 
     public Block(float x, float y, int type, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
-        this.width = width;
-        this.height = height;
+        this.objectWidth = width;
+        this.objectHeight = height;
         this.type = type;
     }
 
@@ -34,6 +34,6 @@ public class Block extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x, (int)y, height, width);
+        return new Rectangle((int)x, (int)y, objectHeight, objectWidth);
     }
 }

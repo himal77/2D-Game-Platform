@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Animation {
     private int speed;
-    private int frames = 5;
+    private int frames;
 
     private int index = 0;
     private int count = 0;
@@ -14,11 +14,13 @@ public class Animation {
     private BufferedImage currentImage;
 
     public Animation(int speed, BufferedImage... args){
+        this.frames = args.length;
         this.speed = speed;
         images = new BufferedImage[args.length];
         for(int i = 0; i < args.length; i++){
             images[i] = args[i];
         }
+
     }
 
     public void runAnimation(){

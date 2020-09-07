@@ -6,7 +6,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 
 public abstract class GameObject {
-    protected int width, height;
+    protected int objectWidth, objectHeight;
+    protected int boundWidth, boundHeight;
     protected float x, y;
     protected ObjectId objectId;
     protected float velX = 0, velY = 0;
@@ -88,11 +89,19 @@ public abstract class GameObject {
         this.facing = facing;
     }
 
-    public int getHeight() {
-        return height;
+    public int getObjectHeight() {
+        return objectHeight;
     }
 
-    public int getWidth() {
-        return width;
+    public int getObjectWidth() {
+        return objectWidth;
+    }
+
+    public int getBoundHeight() {
+        return boundHeight;
+    }
+
+    public void setBoundHeight(int boundHeight) {
+        this.boundHeight = boundHeight;
     }
 }

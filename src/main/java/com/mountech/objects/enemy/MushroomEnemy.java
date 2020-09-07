@@ -4,6 +4,7 @@ import com.mountech.Game;
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.imageLoader.Texture;
+import com.mountech.window.Animation;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -11,26 +12,25 @@ import java.util.LinkedList;
 public class MushroomEnemy extends GameObject {
     private int type;
 
+    private Animation mushroomAnimation;
     private Texture texture = Game.getTexture();
 
     public MushroomEnemy(float x, float y, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
-        this.width = width;
-        this.height = height;
+        this.objectWidth = width;
+        this.objectHeight = height;
+        mushroomAnimation = new Animation(10, texture.mushroomEnemy[0], texture.mushroomEnemy[1]);
     }
 
     public void tick(LinkedList<GameObject> object) {
-
+        mushroomAnimation.runAnimation();
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.drawImage(texture.mushroomEnemy[0], (int)x,(int)y, (int)(width * 2.5), (int)(height * 2.5), null);
-        Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.draw(getBounds());
+        mushroomAnimation.drawAnimation(g, (int)x, (int)y, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x , (int)y + 10, width + (width * 100)/100, height + (height * 200)/100);
+        return new Rectangle((int)x , (int)y + (objectHeight * 30)/100, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
     }
 }

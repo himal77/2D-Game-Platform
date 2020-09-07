@@ -9,8 +9,8 @@ import java.util.LinkedList;
 public class Flag extends GameObject  {
     public Flag(float x, float y, ObjectId objectId, int width, int height) {
         super(x, y, objectId);
-        this.width = width;
-        this.height = height;
+        this.objectWidth = width;
+        this.objectHeight = height;
     }
 
     public void tick(LinkedList<GameObject> object) {

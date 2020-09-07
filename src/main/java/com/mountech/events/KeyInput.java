@@ -24,15 +24,15 @@ public class KeyInput extends KeyAdapter {
             tempObject = handler.objects.get(i);
 
             if(tempObject.getObjectId() == ObjectId.Player){
-                if(key == KeyEvent.VK_D){
+                if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT){
                     tempObject.setFacing(1);
                     tempObject.setVelX(5);
                 }
-                if(key == KeyEvent.VK_A){
+                if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT){
                     tempObject.setFacing(-1);
                     tempObject.setVelX(-5);
                 }
-                if(key == KeyEvent.VK_W && tempObject.isJumping() == false){
+                if((key == KeyEvent.VK_W && tempObject.isJumping() == false) || (key == KeyEvent.VK_UP && tempObject.isJumping() == false)){
                     tempObject.setVelY(-7);
                     tempObject.setJumping(true);
                 }
@@ -49,8 +49,8 @@ public class KeyInput extends KeyAdapter {
             tempObject = handler.objects.get(i);
 
             if(tempObject.getObjectId() == ObjectId.Player){
-                if(key == KeyEvent.VK_D) tempObject.setVelX(0);
-                if(key == KeyEvent.VK_A) tempObject.setVelX(0);
+                if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) tempObject.setVelX(0);
+                if(key == KeyEvent.VK_A ||  key == KeyEvent.VK_LEFT) tempObject.setVelX(0);
                 if(key == KeyEvent.VK_SPACE) tempObject.setVelY(0);
             }
         }
