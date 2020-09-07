@@ -26,9 +26,11 @@ public class MushroomEnemy extends GameObject {
     public void render(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawImage(texture.mushroomEnemy[0], (int)x,(int)y, (int)(width * 2.5), (int)(height * 2.5), null);
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.draw(getBounds());
     }
 
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle((int)x , (int)y + 10, width + (width * 100)/100, height + (height * 200)/100);
     }
 }

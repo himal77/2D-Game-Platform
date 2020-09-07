@@ -65,8 +65,8 @@ public class Player extends GameObject {
                 if(getBoundsBottom().intersects(tempObject.getBounds())) {
                     velY = 0;
                     y -= 1;
-                    falling = false;
                     jumping = false;
+                    falling = false;
                 }else{
                     falling = true;
                 }
@@ -90,7 +90,7 @@ public class Player extends GameObject {
             if(facing == 1)
                 g.drawImage(tex.playerFaceRight[3], (int) x, (int) y, (int) width, (int) height, null);
             else
-                g.drawImage(tex.playerFaceLeft[3], (int) x, (int) y, (int) width, (int) height, null);
+                g.drawImage(tex.playerFaceLeft[1], (int) x, (int) y, (int) width, (int) height, null);
         }else{
             if(velX != 0 && facing == 1){
                 playerWalkRight.drawAnimation(g, (int)x, (int)y, (int) width, (int) height);
