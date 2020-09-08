@@ -27,6 +27,8 @@ public class Block extends GameObject {
     }
 
     public void render(Graphics g) {
+        Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.draw(getBounds());
         if(type == 0)
             g.drawImage(texture.block[0], (int)x, (int)y, null);
         if(type == 1)
@@ -34,6 +36,6 @@ public class Block extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x, (int)y, objectHeight, objectWidth);
+        return new Rectangle((int)x, (int)y, objectWidth - (objectWidth * 50)/100, objectHeight - (objectHeight * 50)/100);
     }
 }
