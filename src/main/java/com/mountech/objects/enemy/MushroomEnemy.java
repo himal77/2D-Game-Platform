@@ -12,6 +12,11 @@ import java.util.LinkedList;
 public class MushroomEnemy extends GameObject {
     private int type;
 
+    private Rectangle topRect = new Rectangle();
+    private Rectangle bottomRect = new Rectangle();
+    private Rectangle leftRect = new Rectangle();
+    private Rectangle rightRect = new Rectangle();
+
     private Animation mushroomAnimation;
     private Texture texture = Game.getTexture();
 
@@ -20,6 +25,8 @@ public class MushroomEnemy extends GameObject {
         this.objectWidth = width;
         this.objectHeight = height;
         mushroomAnimation = new Animation(10, texture.mushroomEnemy[0], texture.mushroomEnemy[1]);
+        boundWidth = objectWidth + (objectWidth * 36)/100; //increased with by 36%
+        boundHeight = objectHeight + (objectHeight * 100)/100; // increased height by 150%
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -27,10 +34,34 @@ public class MushroomEnemy extends GameObject {
     }
 
     public void render(Graphics g) {
+        Graphics2D graphics2D = (Graphics2D) g;
         mushroomAnimation.drawAnimation(g, (int)x, (int)y, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int)x , (int)y + (objectHeight * 30)/100, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
+        // Bound y starts at 45% down of height
+        return new Rectangle((int)x , (int)y + (objectHeight * 45)/100, boundWidth, boundHeight);
+    }
+
+    public Rectangle getTopRect() {
+        topRect.setBounds((int)getBounds().getX() + (boundWidth*25)/100, (int)getBounds().getY(),
+                boundWidth - (boundWidth * 50)/100, boundHeight / 2);
+        return topRect;
+    }
+
+    public Rectangle getBottomRect() {
+        return bottomRect;
+    }
+
+    public Rectangle getLeftRect() {
+        leftRect.setBounds((int)getBounds().getX(), (int)getBounds().getY() + (boundHeight * 30) / 100,
+                boundWidth - (boundWidth * 80)/100, boundHeight - (boundHeight * 60) / 100);
+        return leftRect;
+    }
+
+    public Rectangle getRightRect() {
+        rightRect.setBounds((int)getBounds().getX() + (boundWidth * 80) / 100, (int)getBounds().getY() + (boundHeight * 30) / 100,
+                boundWidth - (boundWidth * 80)/100, boundHeight - (boundHeight * 60) / 100);
+        return rightRect;
     }
 }

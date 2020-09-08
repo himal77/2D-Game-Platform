@@ -3,6 +3,7 @@ package com.mountech.objects.enemy;
 import com.mountech.Game;
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
+import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
 import com.mountech.window.Animation;
 
@@ -17,27 +18,52 @@ public class DuckEnemy extends GameObject {
     private Rectangle leftRect = new Rectangle();
     private Rectangle rightRect = new Rectangle();
 
-    private Animation duckWalkingAnimation;
+    private Animation duckWalkingLeftAnimation;
+    private Animation duckWalkingRightAnimation;
     private Texture texture = Game.getTexture();
+    private Handler handler = null;
 
-    public DuckEnemy(float x, float y, ObjectId objectId, int width, int height) {
+    public DuckEnemy(float x, float y, ObjectId objectId, Handler handler, int width, int height) {
         super(x, y, objectId);
+        this.handler = handler;
         this.objectWidth = width;
         this.objectHeight = height;
         boundWidth = objectWidth - (int)(objectWidth * 42)/100;
         boundHeight = objectHeight;
-        duckWalkingAnimation = new Animation(10, texture.duckEnemy[0], texture.duckEnemy[1]);
+        duckWalkingLeftAnimation = new Animation(10, texture.duckEnemy[0], texture.duckEnemy[1]);
+        duckWalkingRightAnimation = new Animation(10, texture.duckEnemy[2], texture.duckEnemy[3]);
+
     }
 
     public void tick(LinkedList<GameObject> object) {
-        if(x < 0) velX += 0.01;
-        if(x > 500); velX -= 0.01;
+        collision();
+        velX = (float) (facing * 1.1);
         x += velX;
-        duckWalkingAnimation.runAnimation();
+        if(facing == -1)
+            duckWalkingLeftAnimation.runAnimation();
+        else
+            duckWalkingRightAnimation.runAnimation();
+    }
+
+    public void collision(){
+        for(int i = 0; i < handler.objects.size(); i++){
+            GameObject tempObject = handler.objects.get(i);
+            if(tempObject.getObjectId() == ObjectId.Block){
+                if(getLeftRect().intersects(tempObject.getBounds())){
+                    facing = 1;
+                }
+                if(getRightRect().intersects(tempObject.getBounds())){
+                    facing = -1;
+                }
+            }
+        }
     }
 
     public void render(Graphics g) {
-        duckWalkingAnimation.drawAnimation(g, (int)x, (int)y, objectWidth, objectHeight);
+        if (facing == -1)
+            duckWalkingLeftAnimation.drawAnimation(g, (int)x, (int)y, objectWidth, objectHeight);
+        else
+            duckWalkingRightAnimation.drawAnimation(g, (int)x, (int)y, objectWidth, objectHeight);
     }
 
     public Rectangle2D getBounds() {
