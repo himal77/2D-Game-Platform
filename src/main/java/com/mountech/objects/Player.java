@@ -31,8 +31,8 @@ public class Player extends GameObject {
         playerWalkLeft = new Animation(4,  tex.playerFaceLeft[0],
                 tex.playerFaceLeft[1],tex.playerFaceLeft[2],
                 tex.playerFaceLeft[3],tex.playerFaceLeft[4]);
-        boundWidth = (objectWidth * 50)/100;
-        boundHeight =  (objectHeight *25)/100;
+        boundWidth = objectWidth - (objectWidth * 50)/100;
+        boundHeight =  objectHeight - (objectHeight *25)/100;
 
     }
 
@@ -88,6 +88,7 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.BLUE);
+        System.out.println(boundHeight);
 
         if(jumping){
             if(facing == 1)
@@ -109,36 +110,32 @@ public class Player extends GameObject {
     }
 
     public Rectangle getBounds(){
-        return new Rectangle((int)x + 15, (int)y + 15, objectWidth - (int)(objectWidth * 50)/100, objectHeight - (int)(objectHeight *25)/100);
+        return new Rectangle((int)x + 15, (int)y + 15, boundWidth, boundHeight );
     }
 
     public Rectangle getBoundsBottom() {
+        // start at 28% off from x, and 28% before total boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        int boundW = (int)getBounds().getWidth(); // 25
-        int boundH = (int)getBounds().getHeight(); // 75
-        return new Rectangle(boundX + 7, boundY + (int)(boundH / 2), boundW - 7, (int)(boundH / 2));
+        return new Rectangle(boundX + (boundWidth * 28)/100, boundY + (int)(boundHeight / 2), boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
     }
 
     public Rectangle getBoundsTop() {
+        // start at 28% off from x, and 28% before total boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        int boundW = (int)getBounds().getWidth();
-        int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX + 7, boundY, boundW - 7, (int)(boundH / 2));
+        return new Rectangle(boundX + (boundWidth * 28)/100, boundY, boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
     }
     public Rectangle getBoundsRight() {
+        // start at 28% less than boundWidth, and 28% of boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        int boundW = (int)getBounds().getWidth();
-        int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX + boundW - 7 , boundY + 5, 7, boundH - 15);
+        return new Rectangle(boundX + boundWidth - (boundWidth * 28)/100 , boundY + (boundHeight * 6)/100, (boundWidth * 28)/100, boundHeight - (boundHeight * 20)/100);
     }
     public Rectangle getBoundsLeft() {
+        // start at x to boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        int boundW = (int)getBounds().getWidth();
-        int boundH = (int)getBounds().getHeight();
-        return new Rectangle(boundX, boundY + 5, 7, boundH - 15);
+        return new Rectangle(boundX, boundY + (boundHeight * 6)/100, (boundWidth * 28)/100, boundHeight - (boundHeight * 20)/100);
     }
 }

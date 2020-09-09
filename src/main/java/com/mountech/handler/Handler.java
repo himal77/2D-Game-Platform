@@ -13,6 +13,8 @@ import java.util.LinkedList;
 
 public class Handler {
 
+    private int w, h;
+
     public LinkedList<GameObject> objects = new LinkedList<GameObject>();
 
     private GameObject tempObject;

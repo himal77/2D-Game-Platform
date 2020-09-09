@@ -13,8 +13,9 @@ import java.util.LinkedList;
 
 public class DuckEnemy extends GameObject {
     private int type;
+    private float duckSpeed = 1.1f;
+
     private Rectangle topRect = new Rectangle();
-    private Rectangle bottomRect = new Rectangle();
     private Rectangle leftRect = new Rectangle();
     private Rectangle rightRect = new Rectangle();
 
@@ -37,7 +38,7 @@ public class DuckEnemy extends GameObject {
 
     public void tick(LinkedList<GameObject> object) {
         collision();
-        velX = (float) (facing * 1.1);
+        velX = (float) (facing * duckSpeed);
         x += velX;
         if(facing == -1)
             duckWalkingLeftAnimation.runAnimation();
@@ -79,21 +80,15 @@ public class DuckEnemy extends GameObject {
         return topRect;
     }
 
-    public Rectangle bottomRect(){
-        // Reducing the size of width by 40%
-        // Starting 10% off from x w.r.t width
-        // Starting 10% off from y w.r.t height
-        bottomRect.setBounds((int)x + (int)(boundWidth * 20)/100, (int)y + (int)(boundHeight * 50)/100, boundWidth - (int)(boundWidth * 40)/100, boundHeight / 2);
-        return bottomRect;
-    }
-
     public Rectangle getRightRect(){
-        rightRect.setBounds((int)x + (boundWidth * 90)/100, (int)y+ (boundWidth * 5)/100, boundWidth - (boundWidth * 90) / 100,boundHeight - (boundHeight * 10)/100);
+        // x, Starting 90% further of x w.r.t boundWidth, and with width of 90% less w.r.t boundWidth
+        // y, Starting 5% down w.r.t boundHeight
+        rightRect.setBounds((int)x + (boundWidth * 90)/100, (int)y+ (boundHeight * 5)/100, boundWidth - (boundWidth * 90) / 100,boundHeight - (boundHeight * 20)/100);
         return rightRect;
     }
 
     public Rectangle getLeftRect() {
-        leftRect.setBounds((int)x, (int)y + (boundWidth * 50)/100, boundWidth - (boundWidth * 90) / 100, boundHeight - (boundHeight * 50)/100);
+        leftRect.setBounds((int)x, (int)y + (boundHeight * 5)/100, boundWidth - (boundWidth * 90) / 100, boundHeight - (boundHeight * 20)/100);
         return leftRect;
     }
 }
