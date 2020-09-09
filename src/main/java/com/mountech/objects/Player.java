@@ -6,7 +6,9 @@ import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
 import com.mountech.window.Animation;
+import com.mountech.window.Window;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -48,7 +50,7 @@ public class Player extends GameObject {
             }
         }
         collision(object);
-        if(facing == 1)
+         if(facing == 1)
             playerWalkRight.runAnimation();
         else
             playerWalkLeft.runAnimation();
@@ -58,14 +60,15 @@ public class Player extends GameObject {
         for(int i= 0; i < handler.objects.size(); i++){
             GameObject tempObject = handler.objects.get(i);
 
+            // Collision checking for block
             if(tempObject.getObjectId() == ObjectId.Block) {
 
-                if(getBoundsTop().intersects(tempObject.getBounds())){
+                if(getTopRect().intersects(tempObject.getBounds())){
                     jumping = false;
                     velY = 0;
                     y += 1;
                 }
-                if(getBoundsBottom().intersects(tempObject.getBounds())) {
+                if(getBottomRect().intersects(tempObject.getBounds())) {
                     velY = 0;
                     y -= 1;
                     jumping = false;
@@ -73,13 +76,32 @@ public class Player extends GameObject {
                 }else{
                     falling = true;
                 }
-                if(getBoundsRight().intersects(tempObject.getBounds())){
+                if(getRightRect().intersects(tempObject.getBounds())){
                     velX = 0;
                     x = this.getX() - 1;
                 }
-                if(getBoundsLeft().intersects(tempObject.getBounds())){
+                if(getLeftRect().intersects(tempObject.getBounds())){
                     velX = 0;
                     x = this.getX() + 1;
+                }
+            }
+
+            // Collision checking for enemies
+            if(tempObject.getObjectId() == ObjectId.duckEnemy || tempObject.getObjectId() == ObjectId.mushroomEnemy) {
+                if(getRightRect().intersects(tempObject.getLeftRect()) || getLeftRect().intersects(tempObject.getRightRect())){
+                    float playerX = getX();
+                    float playerY = getY();
+                    Player p = this;
+                    handler.removeObject(this);
+                    int answer = JOptionPane.showConfirmDialog(null, "Do you want to restart");
+                    if(answer == 0){
+                        handler.addObject(p);
+                    }else{
+                        for(int j = 0; j < handler.objects.size(); j++){
+                            handler.removeObject(handler.objects.get(j));
+                        }
+                        Window.frame.setVisible(false);
+                    }
                 }
             }
         }
@@ -88,7 +110,6 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.BLUE);
-        System.out.println(boundHeight);
 
         if(jumping){
             if(facing == 1)
@@ -113,26 +134,28 @@ public class Player extends GameObject {
         return new Rectangle((int)x + 15, (int)y + 15, boundWidth, boundHeight );
     }
 
-    public Rectangle getBoundsBottom() {
+    public Rectangle getBottomRect() {
         // start at 28% off from x, and 28% before total boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        return new Rectangle(boundX + (boundWidth * 28)/100, boundY + (int)(boundHeight / 2), boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
+        bottomRect.setBounds(boundX + (boundWidth * 28)/100, boundY + (int)(boundHeight / 2), boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
+        return bottomRect;
     }
 
-    public Rectangle getBoundsTop() {
+    public Rectangle getTopRect() {
         // start at 28% off from x, and 28% before total boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
-        return new Rectangle(boundX + (boundWidth * 28)/100, boundY, boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
+        topRect.setBounds(boundX + (boundWidth * 28)/100, boundY, boundWidth - (boundWidth * 28)/100, (int)(boundHeight / 2));
+        return topRect;
     }
-    public Rectangle getBoundsRight() {
+    public Rectangle getRightRect() {
         // start at 28% less than boundWidth, and 28% of boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();
         return new Rectangle(boundX + boundWidth - (boundWidth * 28)/100 , boundY + (boundHeight * 6)/100, (boundWidth * 28)/100, boundHeight - (boundHeight * 20)/100);
     }
-    public Rectangle getBoundsLeft() {
+    public Rectangle getLeftRect() {
         // start at x to boundWidth
         int boundX = (int)getBounds().getX();
         int boundY = (int)getBounds().getY();

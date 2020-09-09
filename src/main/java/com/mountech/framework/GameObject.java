@@ -9,11 +9,17 @@ public abstract class GameObject {
     protected int objectWidth, objectHeight;
     protected int boundWidth, boundHeight;
     protected float x, y;
-    protected ObjectId objectId;
     protected float velX = 0, velY = 0;
     protected boolean falling = true;
     protected boolean jumping = true;
     protected int facing = 1;
+
+    protected ObjectId objectId;
+
+    protected Rectangle topRect = new Rectangle();
+    protected Rectangle leftRect = new Rectangle();
+    protected Rectangle rightRect = new Rectangle();
+    protected Rectangle bottomRect = new Rectangle();
 
     public GameObject(float x, float y, ObjectId objectId){
         this.x = x;
@@ -101,7 +107,23 @@ public abstract class GameObject {
         return boundHeight;
     }
 
-    public void setBoundHeight(int boundHeight) {
-        this.boundHeight = boundHeight;
+    public int getBoundWidth() {
+        return boundWidth;
+    }
+
+    public Rectangle getTopRect() {
+        return topRect;
+    }
+
+    public Rectangle getLeftRect() {
+        return leftRect;
+    }
+
+    public Rectangle getRightRect() {
+        return rightRect;
+    }
+
+    public Rectangle getBottomRect() {
+        return bottomRect;
     }
 }

@@ -15,10 +15,6 @@ public class DuckEnemy extends GameObject {
     private int type;
     private float duckSpeed = 1.1f;
 
-    private Rectangle topRect = new Rectangle();
-    private Rectangle leftRect = new Rectangle();
-    private Rectangle rightRect = new Rectangle();
-
     private Animation duckWalkingLeftAnimation;
     private Animation duckWalkingRightAnimation;
     private Texture texture = Game.getTexture();
@@ -72,7 +68,7 @@ public class DuckEnemy extends GameObject {
     }
 
 
-    public Rectangle topRect(){
+    public Rectangle getTopRect(){
         // Reducing the size of width by 40%
         // Starting 10% off from x w.r.t width
         // Starting 10% off from y w.r.t height
