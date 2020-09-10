@@ -5,6 +5,8 @@ import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
+import com.mountech.objects.enemy.DeadMushroom;
+import com.mountech.objects.enemy.MushroomEnemy;
 import com.mountech.window.Animation;
 import com.mountech.window.Window;
 
@@ -52,6 +54,19 @@ public class Player extends GameObject {
                 velY = MAX_SPEED;
             }
         }
+
+        // If player goes more down, then he is dead
+        if(y > 600){
+            noOfPlayer -= 1;
+            x = initialPosX;
+            y = initialPosY;
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         collision(object);
         if (facing == 1)
             playerWalkRight.runAnimation();
@@ -90,10 +105,17 @@ public class Player extends GameObject {
             }
 
             // Collision checking for enemies
-            if (tempObject.getObjectId() == ObjectId.duckEnemy || tempObject.getObjectId() == ObjectId.mushroomEnemy) {
-                if (getRightRect().intersects(tempObject.getLeftRect()) || getLeftRect().intersects(tempObject.getRightRect())) {
+            if (tempObject.getObjectId() == ObjectId.DuckEnemy || tempObject.getObjectId() == ObjectId.MushroomEnemy) {
+                // Checking if enemy will be dead &&
+                // Checking if player will be dead
 
-                    // When player collide with enemy, start from initaial position
+                if(getBottomRect().intersects(tempObject.getTopRect())){
+                    float deadEX = tempObject.getX(), deadEY = tempObject.getY();
+                    handler.removeObject(tempObject);
+                    if(tempObject.getObjectId() == ObjectId.MushroomEnemy)
+                        handler.addObject(new DeadMushroom(deadEX, deadEY + 13,  ObjectId.DeadMushroom, 100, 80, 10));
+                } else if (getRightRect().intersects(tempObject.getLeftRect()) || getLeftRect().intersects(tempObject.getRightRect())) {
+                    // When player collide with enemy, start from initial position
                     // decrease no of player by -1
                     noOfPlayer -= 1;
                     x = initialPosX;

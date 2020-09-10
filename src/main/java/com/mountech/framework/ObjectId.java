@@ -5,7 +5,8 @@ public  enum ObjectId {
     Block(),
     Bullet(),
     Flag(),
-    mushroomEnemy(),
-    duckEnemy();
+    DeadMushroom(),
+    MushroomEnemy(),
+    DuckEnemy();
 
 }

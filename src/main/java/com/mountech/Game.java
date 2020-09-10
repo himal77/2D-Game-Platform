@@ -9,6 +9,7 @@ import com.mountech.imageLoader.Texture;
 import com.mountech.objects.Player;
 import com.mountech.window.Window;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,7 @@ public class Game extends Canvas implements Runnable {
     public static int HEIGHT = 600;
 
     private boolean running = false;
+
     private Thread thread;
 
     private Handler handler;

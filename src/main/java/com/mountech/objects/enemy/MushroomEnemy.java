@@ -33,7 +33,6 @@ public class MushroomEnemy extends GameObject {
     }
 
     public void render(Graphics g) {
-        Graphics2D graphics2D = (Graphics2D) g;
         mushroomAnimation.drawAnimation(g, (int)x, (int)y, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
     }
 

@@ -60,11 +60,11 @@ public class Handler {
                 }
                 // mushroomEnemy
                 if(red == 0 && green == 255 && blue == 00){
-                    addObject(new MushroomEnemy(xx * 32, yy * 32,  ObjectId.mushroomEnemy, 40, 27));
+                    addObject(new MushroomEnemy(xx * 32, yy * 32,  ObjectId.MushroomEnemy, 40, 27));
                 }
                 // duckEnemy
                 if(red == 255 && green == 0 && blue == 00){
-                    addObject(new DuckEnemy(xx * 32, yy * 32, ObjectId.duckEnemy, this,  100, 65));
+                    addObject(new DuckEnemy(xx * 32, yy * 32, ObjectId.DuckEnemy, this,  100, 65));
                 }
             }
         }

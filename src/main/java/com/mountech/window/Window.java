@@ -1,6 +1,7 @@
 package com.mountech.window;
 
 import com.mountech.Game;
+import com.mountech.window.information.DisplayInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class Window {
     public Window(int width, int height, String title, Game game){
         game.setPreferredSize(new Dimension(width, height));
         frame = new JFrame(title);
+        frame.setLayout(new BorderLayout());
         frame.add(game);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
