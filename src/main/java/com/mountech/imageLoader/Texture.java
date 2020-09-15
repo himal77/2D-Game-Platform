@@ -17,7 +17,7 @@ public class Texture {
     public BufferedImage[] playerFaceRight = new BufferedImage[5];
     public BufferedImage[] playerFaceLeft = new BufferedImage[5];
     public BufferedImage[] mushroomEnemy = new BufferedImage[3];
-    public BufferedImage[] duckEnemy = new BufferedImage[4];
+    public BufferedImage[] duckEnemy = new BufferedImage[5];
 
 
     public Texture(){
@@ -59,5 +59,7 @@ public class Texture {
         duckEnemy[1] = es.grabImage(7, 1, duckEnemyW, duckEnemyH);
         duckEnemy[2] = es.grabImage(8, 1, duckEnemyW, duckEnemyH);
         duckEnemy[3] = es.grabImage(9, 1, duckEnemyW, duckEnemyH);
+
+        duckEnemy[4] = es.grabImage(13, 1, duckEnemyW, duckEnemyH); //this stores the dead ememy
     }
 }

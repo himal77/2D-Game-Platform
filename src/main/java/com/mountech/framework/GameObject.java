@@ -13,6 +13,7 @@ public abstract class GameObject {
     protected boolean falling = true;
     protected boolean jumping = true;
     protected int facing = 1;
+    protected boolean isDead = false;
 
     protected ObjectId objectId;
 
@@ -125,5 +126,13 @@ public abstract class GameObject {
 
     public Rectangle getBottomRect() {
         return bottomRect;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

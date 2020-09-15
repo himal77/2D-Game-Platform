@@ -7,6 +7,7 @@ import com.mountech.imageLoader.Texture;
 import com.mountech.window.Animation;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public class MushroomEnemy extends GameObject {
