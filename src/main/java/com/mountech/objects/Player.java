@@ -6,7 +6,6 @@ import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
 import com.mountech.objects.enemy.DeadMushroom;
-import com.mountech.objects.enemy.MushroomEnemy;
 import com.mountech.window.Animation;
 import com.mountech.window.Window;
 
@@ -113,7 +112,7 @@ public class Player extends GameObject {
                     float deadEX = tempObject.getX(), deadEY = tempObject.getY();
                     handler.removeObject(tempObject);
                     if(tempObject.getObjectId() == ObjectId.MushroomEnemy)
-                        handler.addObject(new DeadMushroom(deadEX, deadEY + 13,  ObjectId.DeadMushroom, 100, 80, 10));
+                        handler.addObject(new DeadMushroom(deadEX, deadEY + 13,  ObjectId.DeadMushroom, 100, 80, 10, handler));
                 } else if (getRightRect().intersects(tempObject.getLeftRect()) || getLeftRect().intersects(tempObject.getRightRect())) {
                     // When player collide with enemy, start from initial position
                     // decrease no of player by -1
