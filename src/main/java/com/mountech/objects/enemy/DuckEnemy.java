@@ -15,6 +15,7 @@ import java.util.LinkedList;
 public class DuckEnemy extends GameObject {
     private int type;
     private float duckSpeed = 1.1f;
+    private double deadTimeCount = 0.0;
 
     private Animation duckWalkingLeftAnimation;
     private Animation duckWalkingRightAnimation;
@@ -36,6 +37,19 @@ public class DuckEnemy extends GameObject {
     }
 
     public void tick(LinkedList<GameObject> object) {
+
+        //for deleteing ememy after dead
+        if (isDead) {
+            deadTimeCount += 1 / 60f;
+            if (deadTimeCount > 0.2) {
+                for (int i = 0; i < handler.objects.size(); i++) {
+                    if (handler.objects.get(i).getObjectId() == this.getObjectId()) {
+                        handler.removeObject(this);
+                    }
+                }
+            }
+        }
+
         collision();
         velX = (float) (facing * duckSpeed);
         x += velX;
