@@ -3,6 +3,7 @@ package com.mountech.objects.enemy;
 import com.mountech.Game;
 import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
+import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
 import com.mountech.window.Animation;
 
@@ -12,6 +13,7 @@ import java.util.LinkedList;
 
 public class MushroomEnemy extends GameObject {
     private int type;
+    private double deadTimeCount = 0.0;
 
     private Rectangle topRect = new Rectangle();
     private Rectangle leftRect = new Rectangle();
@@ -19,17 +21,30 @@ public class MushroomEnemy extends GameObject {
 
     private Animation mushroomAnimation;
     private Texture texture = Game.getTexture();
+    private Handler handler;
 
-    public MushroomEnemy(float x, float y, ObjectId objectId, int width, int height) {
+    public MushroomEnemy(float x, float y, ObjectId objectId, int width, int height, Handler handler) {
         super(x, y, objectId);
         this.objectWidth = width;
         this.objectHeight = height;
         mushroomAnimation = new Animation(10, texture.mushroomEnemy[0], texture.mushroomEnemy[1]);
         boundWidth = objectWidth + (objectWidth * 36)/100; //increased with by 36%
         boundHeight = objectHeight + (objectHeight * 100)/100; // increased height by 150%
+        this.handler = handler;
     }
 
     public void tick(LinkedList<GameObject> object) {
+        //for deleteing ememy after dead
+        if (isDead) {
+            deadTimeCount += 1 / 60f;
+            if (deadTimeCount > 0.2) {
+                for (int i = 0; i < handler.objects.size(); i++) {
+                    if (handler.objects.get(i).getObjectId() == this.getObjectId()) {
+                        handler.removeObject(this);
+                    }
+                }
+            }
+        }
         mushroomAnimation.runAnimation();
     }
 

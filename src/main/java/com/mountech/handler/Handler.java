@@ -60,7 +60,7 @@ public class Handler {
                 }
                 // mushroomEnemy
                 if(red == 0 && green == 255 && blue == 00){
-                    addObject(new MushroomEnemy(xx * 32, yy * 32,  ObjectId.MushroomEnemy, 40, 27));
+                    addObject(new MushroomEnemy(xx * 32, yy * 32,  ObjectId.MushroomEnemy, 40, 27, this));
                 }
                 // duckEnemy
                 if(red == 255 && green == 0 && blue == 00){

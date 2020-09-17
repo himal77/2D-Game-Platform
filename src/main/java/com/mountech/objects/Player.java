@@ -111,8 +111,7 @@ public class Player extends GameObject {
                 if(getBottomRect().intersects(tempObject.getTopRect())){
                     float deadEX = tempObject.getX(), deadEY = tempObject.getY();
                     if(tempObject.getObjectId() == ObjectId.MushroomEnemy) {
-                        handler.removeObject(tempObject);
-                        handler.addObject(new DeadMushroom(deadEX, deadEY + 13, ObjectId.DeadMushroom, 100, 80, 10, handler));
+                       tempObject.setDead(true);
                     } else if (tempObject.getObjectId() == ObjectId.DuckEnemy) {
                         tempObject.setDead(true);
                     }
