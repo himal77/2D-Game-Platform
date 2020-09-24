@@ -38,7 +38,7 @@ public class DuckEnemy extends GameObject {
 
     public void tick(LinkedList<GameObject> object) {
 
-        //for deleteing ememy after dead
+        // For deleting enemy after dead
         if (isDead) {
             deadTimeCount += 1 / 60f;
             if (deadTimeCount > 0.2) {

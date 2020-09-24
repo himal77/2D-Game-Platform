@@ -5,7 +5,6 @@ import com.mountech.framework.GameObject;
 import com.mountech.framework.ObjectId;
 import com.mountech.handler.Handler;
 import com.mountech.imageLoader.Texture;
-import com.mountech.objects.enemy.DeadMushroom;
 import com.mountech.window.Animation;
 import com.mountech.window.Window;
 

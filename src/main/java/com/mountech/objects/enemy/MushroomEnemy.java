@@ -37,7 +37,7 @@ public class MushroomEnemy extends GameObject {
         //for deleteing ememy after dead
         if (isDead) {
             deadTimeCount += 1 / 60f;
-            if (deadTimeCount > 0.2) {
+            if (deadTimeCount > 0.1) {
                 for (int i = 0; i < handler.objects.size(); i++) {
                     if (handler.objects.get(i).getObjectId() == this.getObjectId()) {
                         handler.removeObject(this);
@@ -49,7 +49,11 @@ public class MushroomEnemy extends GameObject {
     }
 
     public void render(Graphics g) {
-        mushroomAnimation.drawAnimation(g, (int)x, (int)y, objectWidth + (objectWidth * 150)/100, objectHeight + (objectHeight * 200)/100);
+        if(isDead == false) {
+            mushroomAnimation.drawAnimation(g, (int) x, (int) y, objectWidth + (objectWidth * 150) / 100, objectHeight + (objectHeight * 200) / 100);
+        } else {
+            g.drawImage(texture.mushroomEnemy[2], (int)x + 10, (int)y + 10, boundWidth + 40, boundHeight + 30, null);
+        }
     }
 
     public Rectangle getBounds() {

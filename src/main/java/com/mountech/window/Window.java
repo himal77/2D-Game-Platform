@@ -1,7 +1,6 @@
 package com.mountech.window;
 
 import com.mountech.Game;
-import com.mountech.window.information.DisplayInfo;
 
 import javax.swing.*;
 import java.awt.*;
